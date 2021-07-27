@@ -3,6 +3,7 @@ import "../src/App.css";
 
 //Components
 import { CardList } from "./components/card-list/card-list.component";
+import { SearchBox } from "./components/search-box/search-box.component";
 
 class App extends Component {
   constructor() {
@@ -22,15 +23,16 @@ class App extends Component {
 
   render() {
     const { users, searchField } = this.state;
+
     const filteredUsers = users.filter((user) =>
-      user.name.toLowerCase().includes(searchField.toLocaleLowerCase()),
+      user.name.toLowerCase().includes(searchField.toLowerCase()),
     );
+
     return (
       <div className="App">
-        <input
-          type="search"
+        <SearchBox
           placeholder="Search Users"
-          onChange={(e) => this.setState({ searchField: e.target.value })}
+          handleChange={(e) => this.setState({ searchField: e.target.value })}
         />
         <CardList users={filteredUsers} />
       </div>
